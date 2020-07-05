@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
   try {
     const data = await User.find();
     res.send(data);
-  }catch(err){
+  } catch (err) {
     res.status(500).send(err);
   }
 });
@@ -16,15 +16,15 @@ router.get('/:id', async (req, res, next) => {
 
   try {
     let data = await User.findById(req.params.id);
-    data ? res.send(data) : res.status(404).send("Usuário não encontrado");  
+    data ? res.send(data) : res.status(404).send("Usuário não encontrado");
   } catch (err) {
-    res.status(500).send(err)
+    res.status(500).send("Usuário não encontrado");
   }
 })
 
 router.post('/', async (req, res, next) => {
-  let { nome, email, idade, cpf, telefone, contato_emergencia } = req.body;
-  let user = new User({ nome, email, idade, cpf, telefone, contato_emergencia, cervejas: 0 });
+  let { nome, email, password, username, idade, cpf, telefone, contato_emergencia } = req.body;
+  let user = new User({ nome, email, password, username, idade, cpf, telefone, contato_emergencia, cervejas: 0 });
   console.log(user);
   try {
     await user.save();
@@ -36,10 +36,10 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
   try {
-    let remove = await User.remove();
+    let remove = await User.deleteMany();
     res.send(remove);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send("Erro ao remover");
   }
 })
 
