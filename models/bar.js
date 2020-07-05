@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const BarSchema = new mongoose.Schema({
     nome: { type: String, required: true },
+    landscape: { type: String, required: true },
     localizacao: { latitude: Number, longitude: Number },
-    foto: { type: String },
+    logo: { type: String },
     cardapio: {
         comida: [
             {
@@ -28,13 +29,15 @@ const BarSchema = new mongoose.Schema({
                 promocao: { type: Boolean }
             }
         ],
-        eventos:[{
+        eventos: [{
             nome: { type: String },
             data: { type: String },
             hora: { type: String },
 
         }]
-    }
+    },
+    mural:[{url:{type:String}}]
+
 })
 
 const Bar = mongoose.model("Bar", BarSchema);
