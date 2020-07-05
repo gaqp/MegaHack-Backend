@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,6 +16,7 @@ const router = require('./routes/index');
 var app = express();
 
 mongoose.connect("mongodb+srv://gaqp:BATATA100@cluster0-d2gal.gcp.mongodb.net/MegaHack?retryWrites=true&w=majority", { useNewUrlParser: true,useUnifiedTopology: true });
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
