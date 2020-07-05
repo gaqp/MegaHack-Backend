@@ -4,6 +4,14 @@ var User = require('../models/user.js');
 
 
 /* GET users listing. */
+router.get('/', async (req, res, next) => {
+  try {
+    const data = await User.find();
+    res.send(data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 router.post('/login', async (req, res, next) => {
   let {login,password} = req.body
   try {
